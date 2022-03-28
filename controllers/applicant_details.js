@@ -2,7 +2,7 @@ const models = require("../models")
 
 function save(req, res) {
   const applicantDetails = {
-    applicant_id: 1,
+    // applicant_id: 1,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email_address: req.body.email_address,
@@ -13,6 +13,9 @@ function save(req, res) {
     salary: req.body.salary,
     experience: req.body.experience,
     resume: req.body.resume,
+    cover_letter: req.body.cover_letter,
+    availabilty: req.body.availabilty,
+    contract_type: req.body.contract_type,
     status: req.body.status,
   }
   models.Applicant_Details.create(applicantDetails)
@@ -78,6 +81,9 @@ function update(req, res) {
     salary: req.body.salary,
     experience: req.body.experience,
     resume: req.body.resume,
+    cover_letter: req.body.cover_letter,
+    availabilty: req.body.availabilty,
+    contract_type: req.body.contract_type,
     status: req.body.status,
   }
 
