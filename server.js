@@ -1,9 +1,26 @@
-const http = require('http');
+const http = require("http")
+const express = require("express")
+const bodyParser = require("body-parser")
+const cors = require("cors")
+const app = express()
 
-const app = require('./app');
+const server = http.createServer(app)
 
-const port  = 3001;
+const ApplicantRoute = require("./routes/applicantsRoute")
+const AdminRoute = require("./routes/adminRoute")
 
-const server = http.createServer(app);
+app.use(bodyParser.json())
 
-server.listen(port);
+app.use(
+  cors({
+    origin: "*",
+  })
+)
+
+app.use("/applicant", ApplicantRoute)
+app.use("/admin", AdminRoute)
+
+const port = 3001
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`)
+})
