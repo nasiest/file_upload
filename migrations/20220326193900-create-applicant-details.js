@@ -44,12 +44,6 @@ module.exports = {
       cover_letter: {
         type: Sequelize.STRING
       },
-      availabilty: {
-        type: Sequelize.STRING
-      },
-      contract_type: {
-        type: Sequelize.STRING
-      },
       status: {
         type: Sequelize.STRING
       },
