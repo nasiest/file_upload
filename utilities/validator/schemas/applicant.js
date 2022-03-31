@@ -13,6 +13,7 @@ BODY: 'req.body',
  */
 function createApplicantSchema() {
     return (req, res, next) => {
+        console.log("Hello", req.body)
         const bodySchema = Joi.object({
             first_name: Joi.string().lowercase().trim().required().messages({
                 'any.required': "Applicant's first name was not provided",
@@ -35,10 +36,10 @@ function createApplicantSchema() {
             notice_period: Joi.string().lowercase().required().messages({
                 'any.required': "Applicant's notice period was not provided",
             }),
-            salary: Joi.number().required().messages({
+            salary: Joi.string().required().messages({
                 'any.required': "Applicant's salary expectations was not provided",
             }),
-            experience: Joi.string().lowercase().required().messages({
+            experience: Joi.number().required().messages({
                 'any.required': "Applicant's experience level was not provided",
             }),
             job_availability: Joi.array().items(
@@ -52,8 +53,6 @@ function createApplicantSchema() {
                 })
             ),
             resume: Joi.string().lowercase().trim().required().messages({
-                'any.required': "Applicant's phone number was not provided",
-            }).messages({
                 'any.required': "Applicant's resume was not provided",
             }),
             cover_letter: Joi.string().trim().required().messages({
@@ -64,7 +63,7 @@ function createApplicantSchema() {
                 .trim()
                 .required()
                 .messages({
-                    'any.required': "Applicantions status was not provided",
+                    'any.required': "Applicantion's status was not provided",
                 }),
         });
         validator(req, [bodySchema], [payload.BODY]);
