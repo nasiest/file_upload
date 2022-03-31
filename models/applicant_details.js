@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     experience: DataTypes.STRING,
     resume: DataTypes.STRING,
     cover_letter: DataTypes.STRING,
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
+
   }, {
     sequelize,
     modelName: 'Applicant_Details',

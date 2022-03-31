@@ -1,4 +1,3 @@
-
 const Validator = require('fastest-validator'); 
 const models = require("../models")
 
@@ -17,7 +16,7 @@ function save(req, res) {
     cover_letter: req.body.cover_letter,
     status: req.body.status,
     job_type_id: req.body.job_type_id,
-    availabilty_id: req.body.job_availability
+    // availabilty_id: req.body.availabilty_id
   }
 // Data validation for creating Applicant_Details. . .
   const schema = {
@@ -37,25 +36,34 @@ function save(req, res) {
     });
   }
 
-  models.Job_Type.findByPk()
-
-  models.Applicant_Details.create(applicantDetails)
-    .then(result => {
-      // retrieve the applicant details_id returned in the result and perform the following queries . ..
-      // --- perform a job_type insertion associated with the applicant details_id
-      // --- perform a job_availability insertion associated with the applicant details_id 
-
-      res.status(201).json({
-        message: "Applicant Profile created Successfully",
-        applicantDetails: result,
+  models.Job_Type.findByPk(req.body.job_type_id).then(result => {
+    if(result !== null){
+      models.Applicant_Details.create(applicantDetails)
+      .then(result => {
+        // retrieve the applicant details_id returned in the result and perform the following queries . ..
+        // --- perform a job_type insertion associated with the applicant details_id
+        // --- perform a job_availability insertion associated with the applicant details_id 
+  
+        res.status(201).json({
+          message: "Applicant Profile created Successfully",
+          applicantDetails: result,
+        })
       })
-    })
-    .catch(error => {
-      res.status(500).json({
-        message: "Something went wrong!!!",
-        error,
+      .catch(error => {
+        console.log('ERROR', error);
+        res.status(500).json({
+          message: "Something went wrong!!!",
+          error,
+        });
       })
-    })
+    } else{
+      res.status(400).json({
+        message: "Invalid ID !!!"
+      });
+    }
+  });
+
+ 
 }
 
 // Getting a single Applicant data . . .

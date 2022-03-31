@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Job_Type.init({
-    // job_type_id: DataTypes.INTEGER,
+    job_type_id: DataTypes.INTEGER,
     // applicant_id: DataTypes.INTEGER,
     job_type: DataTypes.STRING
   }, {

@@ -11,9 +11,9 @@ module.exports = {
       // availabilty_id: {
       //   type: Sequelize.INTEGER
       // },
-      // applicant_id: {
-      //   type: Sequelize.INTEGER
-      // },
+       applicant_id: {
+          type: Sequelize.INTEGER
+      },
       job_availability: {
         type: Sequelize.STRING
       },

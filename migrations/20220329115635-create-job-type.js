@@ -10,10 +10,13 @@ module.exports = {
       },
 
       // applicant_id: {
-      //   type: Sequelize.INTEGER,   // make this a foreign key, it should be refering the applicant details table . . 
-      // },
+      //    type: Sequelize.INTEGER,   // make this a foreign key, it should be refering the applicant details table . . 
+      //  },
       job_type: {
         type: Sequelize.STRING,
+      },
+      job_type_id: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Job_Availability.init({
-    // availabilty_id: DataTypes.INTEGER,
-    // applicant_id: DataTypes.INTEGER,
+    availabilty_id: DataTypes.INTEGER,
+    applicant_id: DataTypes.INTEGER,
     job_availability: DataTypes.STRING
   }, {
     sequelize,
