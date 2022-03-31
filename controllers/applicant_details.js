@@ -1,8 +1,9 @@
+
+const Validator = require('fastest-validator'); 
 const models = require("../models")
 
 function save(req, res) {
   const applicantDetails = {
-    applicant_id: 1,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email_address: req.body.email_address,
@@ -13,10 +14,37 @@ function save(req, res) {
     salary: req.body.salary,
     experience: req.body.experience,
     resume: req.body.resume,
+    cover_letter: req.body.cover_letter,
     status: req.body.status,
+    job_type_id: req.body.job_type_id,
+    availabilty_id: req.body.job_availability
   }
+// Data validation for creating Applicant_Details. . .
+  const schema = {
+    first_name: {type: "string", optional: false, max: "45"},
+    last_name: {type: "string", optional: false, max: "45"},
+    email_address: {type: "string", optional: false, max: "45"},
+    phone_number: {type: "string", optional: false, max: "15"},
+  }
+
+  const v  = new Validator();
+  const validationResponse = v.validate(applicantDetails, schema);
+
+  if(validationResponse !== true) {
+    return res.status(400).json({
+      message: "Validation failed",
+      error: validationResponse
+    });
+  }
+
+  models.Job_Type.findByPk()
+
   models.Applicant_Details.create(applicantDetails)
     .then(result => {
+      // retrieve the applicant details_id returned in the result and perform the following queries . ..
+      // --- perform a job_type insertion associated with the applicant details_id
+      // --- perform a job_availability insertion associated with the applicant details_id 
+
       res.status(201).json({
         message: "Applicant Profile created Successfully",
         applicantDetails: result,
@@ -80,9 +108,27 @@ function update(req, res) {
     salary: req.body.salary,
     experience: req.body.experience,
     resume: req.body.resume,
+    cover_letter: req.body.cover_letter,
     status: req.body.status,
   }
 
+  // Data validation for Updating Applicant_Details. . .
+  const schema = {
+    first_name: {type: "string", optional: false, max: "45"},
+    last_name: {type: "string", optional: false, max: "45"},
+    email_address: {type: "string", optional: false, max: "45"},
+    phone_number: {type: "string", optional: false, max: "15"},
+  }
+
+  const v  = new Validator();
+  const validationResponse = v.validate(updatedApplicantProfile, schema);
+
+  if(validationResponse !== true) {
+    return res.status(400).json({
+      message: "Validation failed",
+      error: validationResponse
+    });
+  }
   models.Applicant_Details.update(updatedApplicantProfile, {
     where: { id: id },
   })

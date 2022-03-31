@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Applicant_Details.init({
-    applicant_id: DataTypes.INTEGER,
+    // applicant_id: DataTypes.INTEGER,
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
     email_address: DataTypes.STRING,
@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     salary: DataTypes.STRING(1234),
     experience: DataTypes.STRING,
     resume: DataTypes.STRING,
+    cover_letter: DataTypes.STRING,
     status: DataTypes.STRING
   }, {
     sequelize,

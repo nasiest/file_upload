@@ -3,7 +3,7 @@ const models = require('../models');
 
 function save (req, res){
     const admin = {
-        admin_id: 1,
+        // admin_id: 1,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email_address: req.body.email_address,
@@ -62,7 +62,7 @@ function update(req, res) {
   const id = req.params.id;
 
   const updatedAdmin = {
-    admin_id: 1,
+    // admin_id: 1,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email_address: req.body.email_address,

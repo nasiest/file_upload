@@ -8,9 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      applicant_id: {
-        type: Sequelize.INTEGER
-      },
+      // applicant_id: {
+      //   type: Sequelize.INTEGER
+      // },
       first_name: {
         type: Sequelize.STRING
       },
@@ -39,6 +39,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       resume: {
+        type: Sequelize.STRING
+      },
+      cover_letter: {
         type: Sequelize.STRING
       },
       status: {
