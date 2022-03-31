@@ -23,6 +23,7 @@ function save(req, res) {
       })
     })
     .catch(error => {
+      console.log('Error', error)
       res.status(500).json({
         message: "Something went wrong!!!",
         error,
@@ -57,6 +58,7 @@ function index(req, res) {
       res.status(200).json(result)
     })
     .catch(error => {
+      console.log('Error', error)
       res.status(500).json({
         message: "Something Went Wrong!!!",
       })
@@ -91,6 +93,7 @@ function update(req, res) {
       })
     })
     .catch(error => {
+      console.log('Error', error)
       res.status(200).json({
         message: "Something went wrong . . .",
         error: error,
@@ -109,6 +112,7 @@ function destroy(req, res) {
       })
     })
     .catch(error => {
+      console.log('Error', error)
       res.status(200).json({
         message: "Something went wrong . . .",
         error: error,
