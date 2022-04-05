@@ -16,6 +16,7 @@ function save (req, res){
             admin: result
         });
     }).catch(error => {
+      console.log('ERROR', error);
         res.status(500).json({
             message: "Something went wrong!!!",
             admin: error
