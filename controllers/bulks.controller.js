@@ -1,5 +1,5 @@
 const {
-  createBulk,
+  createBulkService,
   getAllBulks,
   getApplicant
 } = require('../services/bulks.services');
@@ -16,19 +16,9 @@ const exec = require('../utilities/core/catchAsync');
  * @returns {*}
  */
 exports.createBulk = exec(async (req, res) => {
-  /**
-   * data needed to create a new user
-   */
+  console.log(req.body, req.file);
   const data = req.body;
-
-  /**
-   * Calling the createApplicant service to handle all the needed business
-   *  logic for creating an applicant
-   */
-  const response = await createBulk(data);
-  /**
-   * returning a successful response if the user sign up is successfully
-   */
+  const response = await createBulkService(req);
   new CreatedResponse('Applicant created successfully', response).send(res);
 });
 

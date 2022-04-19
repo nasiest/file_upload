@@ -5,9 +5,6 @@ const helmet = require('helmet');
 const mysql = require('mysql');
 const HPP = require('hpp');
 const cors = require('cors');
-const path = require('path');
-const CSVToJSON = require('csvtojson');
-const fileUpload = require('express-fileupload');
 
 const routeHandler = require('./routes');
 const {
@@ -39,14 +36,14 @@ module.exports = (config) => {
     database: db.database,
   });
 
-  con.connect(async function (err) {
-    if (err) {
-      config.logger.info(`Couldn't connect to the database\n${err}`);
-      process.exit();
-    }
-    config.logger.info('Successfully connected to the Database');
-    await createTables(con, config.logger);
-  });
+  // con.connect(async function (err) {
+  //   if (err) {
+  //     config.logger.info(`Couldn't connect to the database\n${err}`);
+  //     process.exit();
+  //   }
+  //   config.logger.info('Successfully connected to the Database');
+  //   await createTables(con, config.logger);
+  // });
 
   app.use(bodyParser.json());
   app.use(
@@ -56,12 +53,6 @@ module.exports = (config) => {
   );
   app.use(helmet());
   app.use(cors(corsOption));
-  app.use(fileUpload({
-    limits: {
-        fileSize: 1024 * 1024 // 1 MB
-    },
-    abortOnLimit: true
- }));
 
   // prevent parameter pollution
   app.use(HPP());

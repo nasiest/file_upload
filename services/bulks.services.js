@@ -4,11 +4,14 @@ const {
     NotFoundError,
     DuplicateDataError
 } = require('../utilities/core/ApiError');
+const csvToJson = require('csvtojson');
+const path = require('path');
+const fs = require('fs');
 const {
     query
 } = require('../models/index');
 
-async function createApplicant(data) {
+const createApplicant = async(data)=> {
     const checkApplicant = 'SELECT email FROM applicants WHERE email = ?';
     const checkApplicantResult = await query(checkApplicant, [data.email]);
     // check if applicant alread exists with provided email
@@ -82,12 +85,18 @@ async function createApplicant(data) {
     };
 }
 
-
-
-
+const createBulkService = async({ body, file })=>{
+    try {
+        const appl = await csvToJson().fromFile(file.path);
+        console.log({ appl });
+        console.log({ body, file });
+        fs.unlinkSync(file.path);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
 
 module.exports = {
-    createApplicant,
-    getAllApplicants,
-    getApplicant
+    createBulkService,
+    createApplicant
 }
