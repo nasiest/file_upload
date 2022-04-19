@@ -5,6 +5,9 @@ const helmet = require('helmet');
 const mysql = require('mysql');
 const HPP = require('hpp');
 const cors = require('cors');
+const path = require('path');
+const CSVToJSON = require('csvtojson');
+const fileUpload = require('express-fileupload');
 
 const routeHandler = require('./routes');
 const {
@@ -53,6 +56,12 @@ module.exports = (config) => {
   );
   app.use(helmet());
   app.use(cors(corsOption));
+  app.use(fileUpload({
+    limits: {
+        fileSize: 1024 * 1024 // 1 MB
+    },
+    abortOnLimit: true
+ }));
 
   // prevent parameter pollution
   app.use(HPP());

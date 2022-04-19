@@ -1,8 +1,8 @@
 const {
-  createApplicant,
-  getAllApplicants,
-  getApplicant
-} = require('../services/applicants.services');
+  createLogin,
+  getAllLogins,
+  getLogin
+} = require('../services/logins.services');
 const {
   SuccessResponse,
   CreatedResponse,
@@ -15,7 +15,7 @@ const exec = require('../utilities/core/catchAsync');
  * @param res - The response object representing the HTTP response
  * @returns {*}
  */
-exports.createApplicant = exec(async (req, res) => {
+exports.createLogin = exec(async (req, res) => {
   /**
    * data needed to create a new user
    */
@@ -25,7 +25,7 @@ exports.createApplicant = exec(async (req, res) => {
    * Calling the createApplicant service to handle all the needed business
    *  logic for creating an applicant
    */
-  const response = await createApplicant(data);
+  const response = await createLogin(data);
   /**
    * returning a successful response if the user sign up is successfully
    */
@@ -38,11 +38,10 @@ exports.createApplicant = exec(async (req, res) => {
  * @param res - The response object representing the HTTP response
  * @returns {*}
  */
-exports.getApplicant = exec(async (req, res) => {
+exports.getLogin = exec(async (req, res) => {
   /**
    * data needed to create a new user
    */
-  console.log(req);
   const {
     id
   } = req.params;
@@ -51,7 +50,7 @@ exports.getApplicant = exec(async (req, res) => {
    * Calling the getApplicant service to handle all the needed business
    *  logic for retrieving an applicant
    */
-  const response = await getApplicant(id);
+  const response = await getLogin(id);
   /**
    * returning a successful response if applicant details is retrieved successfully
    */
@@ -67,29 +66,13 @@ exports.getApplicant = exec(async (req, res) => {
  * @param res - The response object representing the HTTP response
  * @returns {*}
  */
-exports.getAllApplicants = exec(async (req, res) => {
+exports.getAllLogins = exec(async (req, res) => {
   
   /**
    * Calling the getAllApplicants service to handle all the needed business
    *  logic for retrieving all applicants
    */
-  const response = await getAllApplicants();
-  /**
-   * returning a successful response if all applicant details is retrieved successfully
-   */
-  new SuccessResponse(
-    "Applicants details retrieved successfully",
-    response
-  ).send(res);
-});
-
-exports.createMultipleApplicants = exec(async (req, res) => {
-  
-  /**
-   * Calling the getAllApplicants service to handle all the needed business
-   *  logic for retrieving all applicants
-   */
-  const response = await getAllApplicants(id);
+  const response = await getAllLogins(id);
   /**
    * returning a successful response if all applicant details is retrieved successfully
    */

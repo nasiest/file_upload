@@ -62,6 +62,26 @@ async function createTables(con, logger) {
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
 `;
+ const createTableRegister = `
+    CREATE TABLE IF NOT EXISTS Register (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    phone_number VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    confirm_password VARCHAR(50) NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+`;
+const createTableLogin = `
+    CREATE TABLE IF NOT EXISTS Login (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+`;
 
     con.query(createTableApplicant, function (error, result) {
         if (error) {
@@ -92,6 +112,18 @@ async function createTables(con, logger) {
     });
 
     con.query(createTableJobType, function (error, results) {
+        if (error) {
+            logger.info(`Couldn't create database tables \n${error.stack}`);
+            process.exit(1);
+        }
+    });
+    con.query(createTableRegister, function (error, results) {
+        if (error) {
+            logger.info(`Couldn't create database tables \n${error.stack}`);
+            process.exit(1);
+        }
+    });
+    con.query(createTableLogin, function (error, results) {
         if (error) {
             logger.info(`Couldn't create database tables \n${error.stack}`);
             process.exit(1);
