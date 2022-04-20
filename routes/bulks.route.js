@@ -21,12 +21,14 @@ const {
 } = require('../utilities/validator/schemas/applicant');
 
 const {
-    createBulk
+    createBulk,
+    fetchApplicantController
 } = require('../controllers/bulks.controller')
 
 const router = express.Router();
 
 router.post('/upload', upload.single('applicant'), createBulk);
+router.get('/fetch-applicant', fetchApplicantController);
 // router.get("/bulk", getAllApplicants);
 // router.get("/bulk/:id", getApplicantSchema(), getApplicant);
 // router.patch("/:id", ApplicantData.update);

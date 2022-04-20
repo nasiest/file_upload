@@ -4,6 +4,8 @@ const {
     NotFoundError,
     DuplicateDataError
 } = require('../utilities/core/ApiError');
+
+const { createApplicants } = require('./queries/applicants');
 const csvToJson = require('csvtojson');
 const path = require('path');
 const fs = require('fs');
@@ -91,6 +93,18 @@ const createBulkService = async({ body, file })=>{
         console.log({ appl });
         console.log({ body, file });
         fs.unlinkSync(file.path);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+const fetchApplicantService = async({body, query, file}) =>{
+    try {
+        const { name, email, password } = body;
+        // const fetchApplicants = `SELECT * FROM applicants`
+        // const insertQuery = `INSERT INTO applicants (name, email, password) VALUES($1, $2, $3) WHERE id = ?`
+        const applicants = await query(createApplicants, [id, email, password]);
+        return applicants; 
     } catch (error) {
         throw new Error(error);
     }

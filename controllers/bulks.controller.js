@@ -1,7 +1,8 @@
 const {
   createBulkService,
   getAllBulks,
-  getApplicant
+  getApplicant,
+  fetchApplicantService
 } = require('../services/bulks.services');
 const {
   SuccessResponse,
@@ -22,6 +23,10 @@ exports.createBulk = exec(async (req, res) => {
   new CreatedResponse('Applicant created successfully', response).send(res);
 });
 
+exports.fetchApplicantController = exec(async (req, res) => {
+  const data = await fetchApplicantService(req);
+  return;
+});
 /**
  * @description A static method to handle retrieving an applicant
  * @param req - The request object representing the HTTP request
